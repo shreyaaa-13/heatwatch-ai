@@ -1,0 +1,49 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heatwave-deployment
+  labels:
+    app: heatwave-intelligence
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: heatwave-intelligence
+  template:
+    metadata:
+      labels:
+        app: heatwave-intelligence
+    spec:
+      containers:
+        - name: heatwave-dashboard
+          image: atharvbadhe01/heatwave-intelligence:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8501
+          resources:
+            resources:
+            requests:
+              cpu: "50m"
+              memory: "96Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 20
+            periodSeconds: 10

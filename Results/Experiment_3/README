@@ -1,0 +1,41 @@
+
+# Experiment 3 — Kubernetes Deployment
+
+## Objective
+Deploy the HEATWATCH AI Streamlit dashboard on a Kubernetes cluster.
+
+## Container Image
+atharvbadhe01/heatwave-intelligence:1.0
+
+## Deployment Configuration
+- Deployment: heatwave-deployment
+- Desired replicas: 2
+- CPU request per pod: 100m
+- CPU limit per pod: 500m
+- Memory request per pod: 128Mi
+- Memory limit per pod: 512Mi
+
+## Service
+- Name: heatwave-service
+- Type: NodePort
+- Service port: 8501
+- NodePort: 30081
+
+## Verified Results
+- Kubernetes node status: Ready
+- Deployment replicas: 2/2 available
+- Both Heatwave pods: 1/1 Running
+- Pod restarts: 0
+- Dashboard accessed successfully using port forwarding at localhost:8503
+
+## Evidence
+
+- Kubernetes Deployment Starting.png
+- Kubernetes Pods Running.png
+- Kubernetes Dashboard.png
+- Kubernetes Status.png
+
+## Note
+Direct browser access through localhost:30081 returned
+a connection-refused error. Port forwarding to localhost:8503
+was verified as a working access method.
